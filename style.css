@@ -1,111 +1,120 @@
-/* Dashboard */
-
-#dashboard{
-display:none;
-}
-
-
-.welcome{
-
-padding:30px;
-
-}
+/* =====================================
+   AI SMART RESCUE DRONE
+   MAIN STYLESHEET
+===================================== */
 
 
-.welcome h1{
+*{
 
-color:#0F62FE;
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Inter',sans-serif;
 
 }
 
 
 
-.mobile-nav{
+body{
 
-display:none;
+background:#ffffff;
 
-}
+color:#1a1a1a;
 
-
-
-.map-section{
-
-padding:30px;
+transition:0.5s;
 
 }
 
 
 
-.map{
+/* ================================
+   HEADER
+================================ */
 
-height:300px;
 
-background:#eef5ff;
+header{
 
-border-radius:16px;
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px 40px;
+
+background:#0F62FE;
+
+color:white;
+
+position:sticky;
+
+top:0;
+
+z-index:1000;
+
+}
+
+
+
+.logo-area{
 
 display:flex;
 
 align-items:center;
 
-justify-content:center;
+gap:15px;
 
-font-size:22px;
+}
 
-color:#0F62FE;
 
-margin:20px 0;
+
+.logo-area img{
+
+width:50px;
+
+height:50px;
+
+}
+
+
+
+nav a{
+
+color:white;
+
+text-decoration:none;
+
+margin-left:25px;
+
+font-weight:600;
+
+}
+
+
+
+nav a:hover{
+
+opacity:0.7;
 
 }
 
 
 
 
-#sosBtn{
 
-display:block;
-
-margin:30px auto;
-
-background:red;
-
-}
+/* ================================
+   LOADING SCREEN
+================================ */
 
 
-
-
-@media(max-width:768px){
-
-
-header{
-
-padding:15px;
-
-}
-
-
-nav{
-
-display:none;
-
-}
-
-
-.cards{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.mobile-nav{
+.loader-screen{
 
 position:fixed;
 
-bottom:0;
-
-left:0;
+height:100vh;
 
 width:100%;
 
@@ -113,21 +122,581 @@ background:white;
 
 display:flex;
 
-justify-content:space-around;
+flex-direction:column;
 
-padding:12px;
+justify-content:center;
 
-box-shadow:0 -5px 20px #ddd;
+align-items:center;
+
+z-index:9999;
 
 }
 
 
 
-.mobile-nav div{
+.loader{
+
+height:60px;
+
+width:60px;
+
+border-radius:50%;
+
+border:6px solid #ddd;
+
+border-top:6px solid #0F62FE;
+
+animation:rotate 1s linear infinite;
+
+}
+
+
+
+@keyframes rotate{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+
+/* ================================
+   LOGIN
+================================ */
+
+
+.login-page{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#F5F8FF;
+
+}
+
+
+
+.login-card{
+
+background:white;
+
+width:380px;
+
+padding:40px;
+
+border-radius:20px;
 
 text-align:center;
 
-font-size:12px;
+box-shadow:
+
+0 10px 30px rgba(0,0,0,.15);
+
+}
+
+
+
+.login-card img{
+
+width:100px;
+
+}
+
+
+
+.login-card input{
+
+width:100%;
+
+padding:15px;
+
+margin:12px 0;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+}
+
+
+
+
+
+button{
+
+padding:14px 30px;
+
+border:none;
+
+border-radius:30px;
+
+background:#0F62FE;
+
+color:white;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:.3s;
+
+}
+
+
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 8px 20px rgba(15,98,254,.3);
+
+}
+
+
+
+/* ================================
+   COMMON SECTIONS
+================================ */
+
+
+section{
+
+padding:40px;
+
+animation:fadeIn .7s ease;
+
+}
+
+
+
+@keyframes fadeIn{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+.hidden{
+
+display:none;
+
+}
+
+
+
+
+
+/* ================================
+   DASHBOARD CARDS
+================================ */
+
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:
+
+0 5px 20px rgba(0,0,0,.1);
+
+text-align:center;
+
+}
+
+
+
+.card h2{
+
+color:#0F62FE;
+
+font-size:35px;
+
+margin-top:15px;
+
+}
+
+
+
+
+
+/* ================================
+   SOS BUTTON
+================================ */
+
+
+.sos{
+
+background:#E53935;
+
+margin-top:30px;
+
+animation:pulse 2s infinite;
+
+}
+
+
+
+@keyframes pulse{
+
+
+0%{
+
+box-shadow:0 0 0 0 rgba(229,57,53,.5);
+
+}
+
+
+70%{
+
+box-shadow:0 0 0 20px rgba(229,57,53,0);
+
+}
+
+
+100%{
+
+box-shadow:0 0 0 0 rgba(229,57,53,0);
+
+}
+
+
+}
+
+
+
+
+
+/* ================================
+   AI CAMERA
+================================ */
+
+
+.camera-dashboard{
+
+background:#F5F8FF;
+
+}
+
+
+
+.camera-box{
+
+height:420px;
+
+background:black;
+
+border-radius:20px;
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+
+
+.live-camera{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+
+
+.scan-box{
+
+position:absolute;
+
+height:180px;
+
+width:180px;
+
+border:3px solid #00C853;
+
+top:30%;
+
+left:40%;
+
+}
+
+
+
+.ai-alert{
+
+margin-top:25px;
+
+padding:20px;
+
+background:#E8FFF0;
+
+border-radius:15px;
+
+color:#00C853;
+
+font-weight:bold;
+
+}
+
+
+
+
+
+/* ================================
+   MAP
+================================ */
+
+
+#map{
+
+height:400px;
+
+width:100%;
+
+border-radius:20px;
+
+}
+
+
+
+.map-section p{
+
+margin-top:20px;
+
+font-weight:bold;
+
+}
+
+
+
+
+
+/* ================================
+   ANALYTICS
+================================ */
+
+
+.analytics{
+
+background:#F5F8FF;
+
+}
+
+
+
+.analytics .card h1{
+
+font-size:40px;
+
+color:#0F62FE;
+
+}
+
+
+
+
+
+/* ================================
+   PROFILE
+================================ */
+
+
+.profile-card{
+
+background:white;
+
+max-width:400px;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:
+
+0 5px 20px rgba(0,0,0,.1);
+
+}
+
+
+
+.profile-card img{
+
+height:100px;
+
+width:100px;
+
+border-radius:50%;
+
+margin-bottom:20px;
+
+}
+
+
+
+
+
+/* ================================
+   DARK MODE SUPPORT
+================================ */
+
+
+body.dark{
+
+background:#121212;
+
+color:white;
+
+}
+
+
+
+body.dark .card,
+
+body.dark .login-card,
+
+body.dark .profile-card{
+
+background:#1E1E1E;
+
+color:white;
+
+}
+
+
+
+body.dark section{
+
+background:#121212;
+
+}
+
+
+
+
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+
+
+@media(max-width:768px){
+
+
+
+header{
+
+flex-direction:column;
+
+gap:15px;
+
+padding:20px;
+
+}
+
+
+
+nav a{
+
+margin:10px;
+
+font-size:14px;
+
+}
+
+
+
+section{
+
+padding:20px;
+
+}
+
+
+
+.login-card{
+
+width:90%;
+
+}
+
+
+
+.camera-box{
+
+height:250px;
+
+}
+
+
+
+.scan-box{
+
+height:100px;
+
+width:100px;
+
+left:35%;
+
+}
+
+
+
+.cards{
+
+grid-template-columns:1fr;
 
 }
 
