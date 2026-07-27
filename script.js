@@ -1,27 +1,26 @@
-// =====================================
-// AI SMART RESCUE DRONE
-// JavaScript Functionality
-// =====================================
-
-
-// Get Elements
-
-const startBtn = document.getElementById("startBtn");
-
-const splash = document.getElementById("splash");
-
-const dashboard = document.getElementById("dashboard");
+/* =====================================
+   AI SMART RESCUE DRONE
+   MAIN JAVASCRIPT
+===================================== */
 
 
 
-// Start Application
+// ================================
+// LOADING SCREEN
+// ================================
 
-startBtn.addEventListener("click",()=>{
+
+window.addEventListener("load",()=>{
 
 
-    splash.style.display="none";
+setTimeout(()=>{
 
-    dashboard.style.display="block";
+
+document.getElementById("loader")
+.style.display="none";
+
+
+},2000);
 
 
 });
@@ -30,93 +29,79 @@ startBtn.addEventListener("click",()=>{
 
 
 
-// Battery Simulation
-
-let battery = 92;
-
-
-function updateBattery(){
+// ================================
+// LOGIN SYSTEM
+// ================================
 
 
-    battery--;
-
-
-    if(battery <= 20){
-
-        battery = 100;
-
-    }
-
-
-    document.getElementById("batteryValue")
-    .innerHTML = battery + "%";
-
-
-}
-
-
-setInterval(updateBattery,5000);
+const loginBtn =
+document.getElementById("loginBtn");
 
 
 
+loginBtn?.addEventListener("click",()=>{
+
+
+let email =
+document.getElementById("email").value;
+
+
+let password =
+document.getElementById("password").value;
 
 
 
-// AI Victim Detection Simulation
-
-
-function detectVictims(){
-
-
-    let victims =
-    Math.floor(Math.random()*6);
-
-
-    document.getElementById("victimCount")
-    .innerHTML = victims;
+let message =
+document.getElementById("loginMessage");
 
 
 
-    let alertBox =
-    document.getElementById("alert");
+if(email && password){
+
+
+message.innerHTML =
+"✅ Login Successful";
+
+
+document.getElementById("loginPage")
+.style.display="none";
 
 
 
-    if(victims > 0){
+document.querySelectorAll(".hidden")
+.forEach(section=>{
 
+section.style.display="block";
 
-        alertBox.innerHTML =
-        "⚠ AI detected "
-        + victims +
-        " victims. Rescue team notified!";
-
-
-    }
-
-    else{
-
-
-        alertBox.innerHTML =
-        "✅ No victims detected. Area is safe.";
-
-
-    }
+});
 
 
 
 }
 
 
-
-setInterval(detectVictims,4000);
-
+else{
 
 
+message.innerHTML =
+"❌ Enter Email and Password";
+
+
+}
+
+
+
+});
 
 
 
 
-// SOS Emergency Button
+
+
+
+// ================================
+// SOS EMERGENCY ALERT
+// ================================
 
 
 const sosBtn =
@@ -124,12 +109,47 @@ document.getElementById("sosBtn");
 
 
 
-sosBtn.addEventListener("click",()=>{
+sosBtn?.addEventListener("click",()=>{
 
 
-    document.getElementById("alert")
-    .innerHTML =
-    "🚨 SOS Activated! Emergency rescue team alerted.";
+alert(
+
+"🚨 EMERGENCY ALERT SENT!\n\nRescue Team Notified"
+
+);
+
+
+fetch(
+
+"http://127.0.0.1:5000/send-alert",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json"
+
+},
+
+
+body:JSON.stringify({
+
+type:"SOS",
+
+message:
+"Emergency rescue required",
+
+priority:
+"CRITICAL"
+
+})
+
+}
+
+);
 
 
 });
@@ -140,32 +160,45 @@ sosBtn.addEventListener("click",()=>{
 
 
 
-// Live Drone Location
+// ================================
+// DRONE STATUS UPDATE
+// ================================
 
 
-function updateLocation(){
-
-
-    let latitude =
-    (17.3850 +
-    Math.random()/100)
-    .toFixed(5);
+function updateDroneStatus(){
 
 
 
-    let longitude =
-    (78.4867 +
-    Math.random()/100)
-    .toFixed(5);
+fetch(
+
+"http://127.0.0.1:5000/drone-status"
+
+)
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+let battery =
+document.getElementById(
+"batteryValue"
+);
 
 
 
-    document.getElementById("location")
-    .innerHTML =
-    "📍 Drone Location: "
-    + latitude +
-    ", "
-    + longitude;
+if(battery){
+
+battery.innerHTML =
+data.battery+"%";
+
+}
+
+
+
+});
 
 
 
@@ -173,5 +206,361 @@ function updateLocation(){
 
 
 
-setInterval(updateLocation,3000);
+setInterval(
+
+updateDroneStatus,
+
+3000
+
+);
+
+
+
+
+
+
+
+// ================================
+// AI DETECTION UPDATE
+// ================================
+
+
+function updateAI(){
+
+
+fetch(
+
+"http://127.0.0.1:5000/ai-detection"
+
+)
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+let victim =
+document.getElementById(
+"victimCount"
+);
+
+
+
+if(victim){
+
+victim.innerHTML =
+data.victims_detected;
+
+}
+
+
+
+
+let alertBox =
+document.getElementById(
+"aiAlert"
+);
+
+
+
+if(alertBox){
+
+
+alertBox.innerHTML =
+
+"🤖 "
++
+data.status
++
+"<br>Confidence: "
++
+data.confidence
++
+"%";
+
+
+}
+
+
+
 });
+
+
+}
+
+
+
+setInterval(
+
+updateAI,
+
+5000
+
+);
+
+
+
+
+
+
+
+// ================================
+// LIVE GPS MAP
+// ================================
+
+
+
+let map;
+
+
+
+let droneMarker;
+
+
+
+
+function initializeMap(){
+
+
+
+map =
+L.map("map")
+.setView(
+
+[17.3850,78.4867],
+
+15
+
+);
+
+
+
+L.tileLayer(
+
+"https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+)
+
+.addTo(map);
+
+
+
+droneMarker =
+
+L.marker(
+
+[17.3850,78.4867]
+
+)
+
+.addTo(map);
+
+
+
+}
+
+
+
+if(
+document.getElementById("map")
+){
+
+initializeMap();
+
+}
+
+
+
+
+
+
+
+function updateLocation(){
+
+
+fetch(
+
+"http://127.0.0.1:5000/location"
+
+)
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+let position =
+
+[
+
+data.latitude,
+
+data.longitude
+
+];
+
+
+
+
+if(droneMarker){
+
+
+droneMarker
+.setLatLng(position);
+
+
+
+map.panTo(position);
+
+
+}
+
+
+
+
+let locationText =
+
+document.getElementById(
+"droneLocation"
+);
+
+
+
+if(locationText){
+
+
+locationText.innerHTML =
+
+"🚁 Drone Location : "
++
+data.latitude
++
+" , "
++
+data.longitude;
+
+
+}
+
+
+
+});
+
+
+}
+
+
+
+setInterval(
+
+updateLocation,
+
+3000
+
+);
+
+
+
+
+
+
+
+
+// ================================
+// DARK MODE
+// ================================
+
+
+
+function enableDarkMode(){
+
+
+document.body
+.classList
+.toggle("dark");
+
+
+}
+
+
+
+
+
+
+
+// ================================
+// SMOOTH SCROLL NAVIGATION
+// ================================
+
+
+
+document.querySelectorAll("nav a")
+
+.forEach(link=>{
+
+
+link.addEventListener(
+
+"click",
+
+function(e){
+
+
+e.preventDefault();
+
+
+let target =
+
+document.querySelector(
+
+this.getAttribute("href")
+
+);
+
+
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+// ================================
+// DRONE FLOAT ANIMATION
+// ================================
+
+
+
+const drone =
+
+document.querySelector(
+".drone-image"
+);
+
+
+
+if(drone){
+
+
+drone.style.animation =
+
+"floatDrone 4s infinite";
+
+
+}
