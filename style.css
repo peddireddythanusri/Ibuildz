@@ -1,483 +1,133 @@
-/* =====================================
-   AI SMART RESCUE DRONE
-   Professional UI Design
-===================================== */
+/* Dashboard */
 
-
-/* ---------- Global Styles ---------- */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', 'Poppins', sans-serif;
+#dashboard{
+display:none;
 }
 
 
-body {
-    background: #FFFFFF;
-    color: #333;
-    min-height: 100vh;
-}
+.welcome{
 
-
-/* ---------- Header ---------- */
-
-header {
-    background: #0F62FE;
-    color: white;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-
-.logo img {
-    width: 45px;
-    height: 45px;
-}
-
-
-.logo h1 {
-    font-size: 24px;
-}
-
-
-/* ---------- Navigation ---------- */
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 16px;
-}
-
-
-nav a:hover {
-    color: #00C853;
-}
-
-
-
-/* ---------- Splash Screen ---------- */
-
-.splash {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-
-.splash img {
-    width: 150px;
-    animation: float 3s infinite;
-}
-
-
-.splash h1 {
-    font-size: 40px;
-    color: #0F62FE;
-    margin-top: 20px;
-}
-
-
-.splash p {
-    font-size: 18px;
-    margin: 15px;
-    color: #555;
-}
-
-
-/* ---------- Buttons ---------- */
-
-button {
-
-    background: #0F62FE;
-    color:white;
-
-    border:none;
-    padding:14px 30px;
-
-    border-radius:30px;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    transition:0.3s;
+padding:30px;
 
 }
 
 
-button:hover {
+.welcome h1{
 
-    background:#00C853;
-    transform:scale(1.05);
+color:#0F62FE;
 
 }
 
 
 
-/* ---------- Dashboard ---------- */
+.mobile-nav{
 
-.dashboard {
-
-    padding:40px;
-
-}
-
-
-.dashboard h2 {
-
-    color:#0F62FE;
-    margin-bottom:25px;
+display:none;
 
 }
 
 
 
-.cards {
+.map-section{
 
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
-    gap:25px;
+padding:30px;
 
 }
 
 
 
-/* ---------- Cards ---------- */
+.map{
 
-.card {
+height:300px;
 
-    background:white;
+background:#eef5ff;
 
-    border-radius:16px;
+border-radius:16px;
 
-    padding:25px;
+display:flex;
 
-    box-shadow:
-    0 5px 20px rgba(0,0,0,0.1);
+align-items:center;
 
-    transition:0.3s;
+justify-content:center;
 
-}
+font-size:22px;
 
+color:#0F62FE;
 
-.card:hover {
-
-    transform:translateY(-8px);
-
-}
-
-
-.card img {
-
-    width:50px;
-
-}
-
-
-.card h3 {
-
-    margin:15px 0;
-
-    color:#0F62FE;
-
-}
-
-
-.card p {
-
-    color:#555;
-
-    font-size:16px;
+margin:20px 0;
 
 }
 
 
 
-/* ---------- Status Cards ---------- */
 
+#sosBtn{
 
-.status {
+display:block;
 
-    display:flex;
+margin:30px auto;
 
-    gap:15px;
-
-    flex-wrap:wrap;
+background:red;
 
 }
 
 
-.status-box {
-
-    flex:1;
-
-    min-width:200px;
-
-    padding:20px;
-
-    border-radius:16px;
-
-    background:#F5F8FF;
-
-}
-
-
-.status-box h3 {
-
-    color:#0F62FE;
-
-}
-
-
-.green {
-
-    color:#00C853;
-
-}
-
-
-.red {
-
-    color:red;
-
-}
-
-
-
-/* ---------- Drone Section ---------- */
-
-
-.drone-section {
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:40px;
-
-}
-
-
-.drone-section img {
-
-    width:350px;
-
-    animation:float 4s infinite;
-
-}
-
-
-
-/* ---------- Map Section ---------- */
-
-
-.map {
-
-    height:350px;
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #e8f0ff,
-    #ffffff
-    );
-
-    border-radius:16px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:20px;
-
-    color:#0F62FE;
-
-}
-
-
-
-/* ---------- Alert Box ---------- */
-
-
-.alert {
-
-    margin-top:20px;
-
-    padding:20px;
-
-    background:#FFF3CD;
-
-    border-left:6px solid #00C853;
-
-    border-radius:10px;
-
-}
-
-
-
-/* ---------- SOS Button ---------- */
-
-
-#sosBtn {
-
-    background:red;
-
-}
-
-
-#sosBtn:hover {
-
-    background:#b30000;
-
-}
-
-
-
-/* ---------- Login / Forms ---------- */
-
-
-.form-container {
-
-    width:400px;
-
-    margin:50px auto;
-
-    padding:30px;
-
-    border-radius:16px;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,0.1);
-
-}
-
-
-input {
-
-    width:100%;
-
-    padding:14px;
-
-    margin:10px 0;
-
-    border:
-
-    1px solid #ddd;
-
-    border-radius:10px;
-
-}
-
-
-
-/* ---------- Footer ---------- */
-
-
-footer {
-
-    background:#0F62FE;
-
-    color:white;
-
-    text-align:center;
-
-    padding:20px;
-
-    margin-top:40px;
-
-}
-
-
-
-/* ---------- Animation ---------- */
-
-
-@keyframes float {
-
-    0% {
-
-        transform:translateY(0);
-
-    }
-
-    50% {
-
-        transform:translateY(-20px);
-
-    }
-
-    100% {
-
-        transform:translateY(0);
-
-    }
-
-}
-
-
-
-/* ---------- Responsive Design ---------- */
 
 
 @media(max-width:768px){
 
 
-header {
+header{
 
-    flex-direction:column;
-
-    gap:15px;
+padding:15px;
 
 }
 
 
-nav a {
+nav{
 
-    margin:10px;
-
-}
-
-
-.dashboard {
-
-    padding:20px;
+display:none;
 
 }
 
 
-.drone-section img {
+.cards{
 
-    width:250px;
+grid-template-columns:1fr;
 
 }
 
 
-.form-container {
 
-    width:90%;
+.mobile-nav{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+background:white;
+
+display:flex;
+
+justify-content:space-around;
+
+padding:12px;
+
+box-shadow:0 -5px 20px #ddd;
+
+}
+
+
+
+.mobile-nav div{
+
+text-align:center;
+
+font-size:12px;
 
 }
 
