@@ -4,90 +4,63 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
 AI Smart Rescue Drone
 </title>
 
+
 <link rel="stylesheet" href="style.css">
 
+
+<!-- Google Font -->
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<!-- Leaflet Map -->
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 
 </head>
 
 
+
 <body>
 
 
-<!-- Splash Screen -->
+<!-- Loading Screen -->
 
-<section class="splash">
+<div class="loader-screen" id="loader">
 
-<img src="assets/images/logo.png" 
-alt="Drone Logo">
+<div class="loader"></div>
 
+<h3>
+Launching AI Rescue System...
+</h3>
 
-<h1>
-AI Smart Rescue Drone
-</h1>
-
-
-<p>
-Disaster Response System
-</p>
-
-
-<button id="startBtn">
-Get Started
-</button>
-
-
-</section>
+</div>
 
 
 
-<script src="script.js"></script>
 
-</body>
-<body>
-
-<!-- Splash Screen -->
-
-<section class="splash" id="splash">
-
-<img src="assets/images/logo.png" 
-alt="Drone Logo">
-
-<h1>
-AI Smart Rescue Drone
-</h1>
-
-<p>
-Disaster Response System
-</p>
-
-<button id="startBtn">
-Get Started
-</button>
-
-</section>
-
-
-
-<!-- Dashboard -->
-
-<section class="dashboard" id="dashboard">
-
+<!-- Header -->
 
 <header>
 
-<div class="logo">
+<div class="logo-area">
 
 <img src="assets/images/logo.png">
 
 <h2>
-AI Rescue Drone
+AI Smart Rescue Drone
 </h2>
 
 </div>
@@ -95,41 +68,87 @@ AI Rescue Drone
 
 <nav>
 
-<a href="#">
-Home
+<a href="#dashboard">
+Dashboard
 </a>
 
-<a href="#">
-Missions
+<a href="#camera">
+AI Camera
 </a>
 
-<a href="#">
-Alerts
+<a href="#map-section">
+Tracking
+</a>
+
+<a href="#analytics">
+Analytics
 </a>
 
 </nav>
+
 
 </header>
 
 
 
 
-<div class="welcome">
 
-<h1>
-Rescue Control Dashboard
-</h1>
+<!-- Login -->
 
-<p>
-Real-time disaster monitoring and AI-based rescue assistance
-</p>
+<section class="login-page" id="loginPage">
+
+
+<div class="login-card">
+
+
+<img src="assets/images/logo.png">
+
+
+<h2>
+Rescue Team Login
+</h2>
+
+
+<input id="email"
+type="email"
+placeholder="Email">
+
+
+<input id="password"
+type="password"
+placeholder="Password">
+
+
+<button id="loginBtn">
+
+Login
+
+</button>
+
+
+<p id="loginMessage"></p>
+
 
 </div>
 
 
+</section>
 
 
-<!-- Drone Status Cards -->
+
+
+
+
+<!-- Dashboard -->
+
+<section id="dashboard"
+class="dashboard hidden">
+
+
+<h1>
+🚁 Rescue Command Center
+</h1>
+
 
 
 <div class="cards">
@@ -138,163 +157,258 @@ Real-time disaster monitoring and AI-based rescue assistance
 <div class="card">
 
 <h3>
-🔋 Battery
+Battery
 </h3>
 
-<p id="batteryValue">
+<h2 id="batteryValue">
 92%
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-📡 Signal
-</h3>
-
-<p class="green">
-Strong
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-👥 Victims Detected
-</h3>
-
-<p id="victimCount">
-03
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-🚁 Drone Status
-</h3>
-
-<p class="green">
-Active
-</p>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- Live Map -->
-
-<div class="map-section">
-
-
-<h2>
-Live Drone Location
 </h2>
 
-
-<div class="map">
-
-📍 Disaster Zone Map
-
-</div>
-
-
-<p id="location">
-Location: 17.3850, 78.4867
-</p>
-
-
 </div>
 
 
 
+<div class="card">
 
+<h3>
+Drone Status
+</h3>
 
-<!-- AI Alert -->
-
-
-<div class="alert" id="alert">
-
-AI Monitoring System Ready
+<h2>
+Active
+</h2>
 
 </div>
 
 
 
 
+<div class="card">
 
-<!-- SOS -->
+<h3>
+Victims Detected
+</h3>
 
-<button id="sosBtn">
+<h2 id="victimCount">
+0
+</h2>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Signal
+</h3>
+
+<h2>
+Strong
+</h2>
+
+</div>
+
+
+</div>
+
+
+
+<button id="sosBtn"
+class="sos">
 
 🚨 Emergency SOS
 
 </button>
 
 
+</section>
 
 
 
-<!-- Mobile Navigation -->
 
 
-<div class="mobile-nav">
 
 
-<div>
-🏠
-<br>
-Home
-</div>
+<!-- AI Camera -->
+
+<section id="camera"
+class="camera-dashboard hidden">
 
 
-<div>
-🚁
-<br>
-Drone
-</div>
+<h2>
+📷 AI Drone Vision
+</h2>
 
 
-<div>
-📍
-<br>
-Map
-</div>
+<div class="camera-box">
 
 
-<div>
-🔔
-<br>
-Alerts
-</div>
+<img src="http://127.0.0.1:5000/video"
+class="live-camera">
 
 
-<div>
-👤
-<br>
-Profile
-</div>
+<div class="scan-box"></div>
 
 
 </div>
 
+
+
+<div class="ai-alert"
+id="aiAlert">
+
+AI System Ready
+
+</div>
 
 
 </section>
+
+
+
+
+
+
+
+
+<!-- Map -->
+
+<section id="map-section"
+class="map-section hidden">
+
+
+<h2>
+📍 Live Drone Tracking
+</h2>
+
+
+<div id="map"></div>
+
+
+<p id="droneLocation">
+
+Loading location...
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- Analytics -->
+
+<section id="analytics"
+class="analytics hidden">
+
+
+<h2>
+📊 Mission Analytics
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Missions
+</h3>
+
+<h1>
+128
+</h1>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Survivors
+</h3>
+
+<h1>
+542
+</h1>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Flight Time
+</h3>
+
+<h1>
+86 hrs
+</h1>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- Profile -->
+
+
+<section class="profile hidden">
+
+
+<h2>
+👤 Rescue Team Profile
+</h2>
+
+
+<div class="profile-card">
+
+
+<img src="assets/images/user-profile.png">
+
+
+<h3>
+Captain Rahul Sharma
+</h3>
+
+
+<p>
+Field Commander
+</p>
+
+
+<p>
+Alpha Rescue Unit
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
 
 
 
@@ -302,4 +416,5 @@ Profile
 
 
 </body>
+
 </html>
