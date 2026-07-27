@@ -1,102 +1,177 @@
-// AI Smart Rescue Drone App JavaScript
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const startBtn = document.querySelector("#startBtn");
-
-    if(startBtn){
-        startBtn.addEventListener("click", () => {
-            alert("Welcome to AI Smart Rescue Drone System 🚁");
-            window.location.href = "#dashboard";
-        });
-    }
+// =====================================
+// AI SMART RESCUE DRONE
+// JavaScript Functionality
+// =====================================
 
 
-    // Drone Status Simulation
+// Get Elements
 
-    let battery = 92;
-    let signal = "Strong";
-    let victimsDetected = 3;
+const startBtn = document.getElementById("startBtn");
 
+const splash = document.getElementById("splash");
 
-    document.getElementById("battery")
-    ?.addEventListener("click", () => {
-
-        battery -= 5;
-
-        if(battery < 0){
-            battery = 100;
-        }
-
-        document.getElementById("batteryValue").innerHTML =
-        battery + "%";
-
-    });
+const dashboard = document.getElementById("dashboard");
 
 
 
-    // AI Detection Simulation
+// Start Application
 
-    function detectVictims(){
-
-        let count = Math.floor(Math.random()*6);
-
-        document.getElementById("victimCount")
-        .innerHTML = count;
-
-        if(count > 0){
-            document.getElementById("alert")
-            .innerHTML =
-            "⚠ Victims detected! Rescue team notified.";
-        }
-        else{
-            document.getElementById("alert")
-            .innerHTML =
-            "No victims detected.";
-        }
-    }
+startBtn.addEventListener("click",()=>{
 
 
-    setInterval(detectVictims,5000);
+    splash.style.display="none";
+
+    dashboard.style.display="block";
+
+
+});
 
 
 
-    // Emergency SOS Button
-
-    const sos =
-    document.querySelector("#sosBtn");
-
-    sos?.addEventListener("click",()=>{
-
-        document.querySelector("#alert")
-        .innerHTML =
-        "🚨 SOS Activated! Emergency Response Team Alerted";
-
-    });
 
 
+// Battery Simulation
 
-    // Live Location
-
-    function updateLocation(){
-
-        let lat =
-        (17.3850 + Math.random()/100)
-        .toFixed(5);
-
-        let lon =
-        (78.4867 + Math.random()/100)
-        .toFixed(5);
+let battery = 92;
 
 
-        document.getElementById("location")
-        ?.innerHTML =
-        `📍 ${lat}, ${lon}`;
+function updateBattery(){
+
+
+    battery--;
+
+
+    if(battery <= 20){
+
+        battery = 100;
 
     }
 
 
-    setInterval(updateLocation,3000);
+    document.getElementById("batteryValue")
+    .innerHTML = battery + "%";
 
 
+}
+
+
+setInterval(updateBattery,5000);
+
+
+
+
+
+
+// AI Victim Detection Simulation
+
+
+function detectVictims(){
+
+
+    let victims =
+    Math.floor(Math.random()*6);
+
+
+    document.getElementById("victimCount")
+    .innerHTML = victims;
+
+
+
+    let alertBox =
+    document.getElementById("alert");
+
+
+
+    if(victims > 0){
+
+
+        alertBox.innerHTML =
+        "⚠ AI detected "
+        + victims +
+        " victims. Rescue team notified!";
+
+
+    }
+
+    else{
+
+
+        alertBox.innerHTML =
+        "✅ No victims detected. Area is safe.";
+
+
+    }
+
+
+
+}
+
+
+
+setInterval(detectVictims,4000);
+
+
+
+
+
+
+
+// SOS Emergency Button
+
+
+const sosBtn =
+document.getElementById("sosBtn");
+
+
+
+sosBtn.addEventListener("click",()=>{
+
+
+    document.getElementById("alert")
+    .innerHTML =
+    "🚨 SOS Activated! Emergency rescue team alerted.";
+
+
+});
+
+
+
+
+
+
+
+// Live Drone Location
+
+
+function updateLocation(){
+
+
+    let latitude =
+    (17.3850 +
+    Math.random()/100)
+    .toFixed(5);
+
+
+
+    let longitude =
+    (78.4867 +
+    Math.random()/100)
+    .toFixed(5);
+
+
+
+    document.getElementById("location")
+    .innerHTML =
+    "📍 Drone Location: "
+    + latitude +
+    ", "
+    + longitude;
+
+
+
+}
+
+
+
+setInterval(updateLocation,3000);
 });
