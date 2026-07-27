@@ -1,489 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Smart Rescue Drone</title>
+<title>
+AI Smart Rescue Drone
+</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 </head>
 
+
 <body>
 
-<!-- Loader -->
 
-<div id="loader">
+<!-- Splash Screen -->
 
-<div class="loader-content">
+<section class="splash">
 
-<div class="spinner"></div>
+<img src="assets/images/logo.png" 
+alt="Drone Logo">
 
-<h1>AI Smart Rescue Drone</h1>
-
-<p>Initializing Rescue System...</p>
-
-</div>
-
-</div>
-
-<!-- Login -->
-
-<section id="loginPage">
-
-<div class="login-box">
 
 <h1>
-
-<i class="fa-solid fa-helicopter"></i>
-
 AI Smart Rescue Drone
-
 </h1>
 
-<p>Disaster Response System</p>
 
-<input
-type="text"
-id="username"
-placeholder="Username">
+<p>
+Disaster Response System
+</p>
 
-<input
-type="password"
-id="password"
-placeholder="Password">
 
-<button onclick="login()">
-
-Login
-
+<button id="startBtn">
+Get Started
 </button>
 
-</div>
 
 </section>
 
-<!-- Dashboard -->
 
-<section id="dashboard">
-
-<!-- Sidebar -->
-
-<div class="sidebar">
-
-<h2>
-
-<i class="fa-solid fa-helicopter"></i>
-
-Rescue Drone
-
-</h2>
-
-<ul>
-
-<li onclick="showPage('home')">
-
-<i class="fa-solid fa-house"></i>
-
-Dashboard
-
-</li>
-
-<li onclick="showPage('monitor')">
-
-<i class="fa-solid fa-video"></i>
-
-Live Monitor
-
-</li>
-
-<li onclick="showPage('map')">
-
-<i class="fa-solid fa-map-location-dot"></i>
-
-GPS Tracking
-
-</li>
-
-<li onclick="showPage('alert')">
-
-<i class="fa-solid fa-bell"></i>
-
-Alerts
-
-</li>
-
-<li onclick="showPage('history')">
-
-<i class="fa-solid fa-clock-rotate-left"></i>
-
-History
-
-</li>
-
-<li onclick="showPage('report')">
-
-<i class="fa-solid fa-file"></i>
-
-Report
-
-</li>
-
-<li onclick="logout()">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-Logout
-
-</li>
-
-</ul>
-
-</div>
-
-<!-- Main -->
-
-<div class="main">
-
-<div class="topbar">
-
-<h1>
-
-AI Rescue Dashboard
-
-</h1>
-
-<span id="officerName">
-
-Welcome Officer
-
-</span>
-
-</div>
-
-<!-- HOME -->
-
-<div id="home" class="page active">
-
-<div class="cards">
-
-<div class="card">
-
-<h3>Drone</h3>
-
-<h2 id="droneStatus">
-
-ONLINE
-
-</h2>
-
-</div>
-
-<div class="card">
-
-<h3>Battery</h3>
-
-<h2 id="battery">
-
-100%
-
-</h2>
-
-</div>
-
-<div class="card">
-
-<h3>Mission</h3>
-
-<h2>
-
-ACTIVE
-
-</h2>
-
-</div>
-
-<div class="card">
-
-<h3>Survivors</h3>
-
-<h2 id="count">
-
-0
-
-</h2>
-
-</div>
-
-</div>
-
-<div class="buttons">
-
-<button onclick="launchDrone()">
-
-Launch Drone
-
-</button>
-
-<button onclick="scanArea()">
-
-Start Scan
-
-</button>
-
-<button onclick="returnDrone()">
-
-Return Drone
-
-</button>
-
-</div>
-
-<div class="chart">
-
-<canvas id="missionChart"></canvas>
-
-</div>
-
-</div>
-<!-- ================= LIVE MONITOR ================= -->
-
-<div id="monitor" class="page">
-
-    <h2>Live Drone Monitoring</h2>
-
-    <div class="monitor-container">
-
-        <div class="camera-card">
-
-            <video id="camera" autoplay playsinline></video>
-
-            <canvas id="overlay"></canvas>
-
-        </div>
-
-        <div class="ai-card">
-
-            <h3>AI Detection</h3>
-
-            <div class="info">
-                <span>Status</span>
-                <strong id="scanStatus">Waiting...</strong>
-            </div>
-
-            <div class="info">
-                <span>Confidence</span>
-                <strong id="confidence">0%</strong>
-            </div>
-
-            <div class="info">
-                <span>Priority</span>
-                <strong id="priority">Normal</strong>
-            </div>
-
-            <button onclick="startCamera()">
-                Start Camera
-            </button>
-
-            <button onclick="simulateDetection()">
-                Detect Survivor
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ================= GPS ================= -->
-
-<div id="map" class="page">
-
-<h2>GPS Tracking</h2>
-
-<div class="map-card">
-
-<iframe
-id="googleMap"
-src="https://www.google.com/maps?q=17.4445,78.3498&z=15&output=embed">
-</iframe>
-
-<div class="gps-details">
-
-<p>
-
-<b>Drone Location</b>
-
-<br>
-
-<span id="droneLocation">
-
-17.4445, 78.3498
-
-</span>
-
-</p>
-
-<p>
-
-<b>Detected Survivor</b>
-
-<br>
-
-<span id="survivorLocation">
-
-Not Detected
-
-</span>
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- ================= ALERTS ================= -->
-
-<div id="alert" class="page">
-
-<h2>Emergency Alerts</h2>
-
-<div class="alert-box">
-
-<h3>
-
-Alert Console
-
-</h3>
-
-<div id="alertMessages">
-
-<p>No Alerts</p>
-
-</div>
-
-<button onclick="sendAlert()">
-
-Notify Rescue Team
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- ================= HISTORY ================= -->
-
-<div id="history" class="page">
-
-<h2>Mission History</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>ID</th>
-
-<th>Mission</th>
-
-<th>Date</th>
-
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-<tbody id="historyBody">
-
-<tr>
-
-<td>001</td>
-
-<td>Flood Rescue</td>
-
-<td>27-Jul-2026</td>
-
-<td>Completed</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-
-
-<!-- ================= REPORT ================= -->
-
-<div id="report" class="page">
-
-<h2>Mission Report</h2>
-
-<div class="report-card">
-
-<h3>Mission Summary</h3>
-
-<p>
-
-Mission ID :
-<b>ARD-001</b>
-
-</p>
-
-<p>
-
-Drone Status :
-<b>SUCCESS</b>
-
-</p>
-
-<p>
-
-Survivors Found :
-<b id="reportCount">0</b>
-
-</p>
-
-<p>
-
-Mission Time :
-<b>03:42</b>
-
-</p>
-
-<button onclick="downloadReport()">
-
-Download Report
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
 
 <script src="script.js"></script>
 
